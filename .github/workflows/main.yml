@@ -55,7 +55,11 @@ jobs:
           sudo make install clean
 
       - name: copy paraview into srcpkgs
-        run: ls && ls /opt && cp -rv testing/srcpkgs/paraview void-packages/srcpkgs
+        run: |
+          ls
+          ls /opt
+          find . -name "paraview"
+          cp -rv testing/srcpkgs/paraview void-packages/srcpkgs
 
       - name: build
         run: |

@@ -23,13 +23,13 @@ jobs:
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/ghc
           sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo apt install git
 
       - name: checkout paraview-void
         uses: actions/checkout@v4
         with:
           ref: master
           path: paraview
-        run: sudo apt install git
 
       - name: checkout void-packages
         uses: actions/checkout@v4

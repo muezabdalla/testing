@@ -56,8 +56,9 @@ jobs:
 
       - name: copy paraview into srcpkgs
         run: |
+          pwd
           ls
-          ls /opt
+          git clone https://github.com/muezabdalla/testing.git testing
           find . -name "paraview"
           cp -rv testing/srcpkgs/paraview void-packages/srcpkgs
 

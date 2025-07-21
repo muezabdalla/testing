@@ -25,11 +25,11 @@ jobs:
           sudo rm -rf /opt/hostedtoolcache/CodeQL
           sudo apt install git
 
-      - name: checkout paraview-void
+      - name: checkout testing
         uses: actions/checkout@v4
         with:
           ref: master
-          path: paraview
+          path: testing
 
       - name: checkout void-packages
         uses: actions/checkout@v4

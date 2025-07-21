@@ -29,6 +29,7 @@ jobs:
         with:
           ref: master
           path: paraview
+        run: sudo apt install git
 
       - name: checkout void-packages
         uses: actions/checkout@v4

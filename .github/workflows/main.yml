@@ -59,12 +59,12 @@ jobs:
           git clone https://github.com/muezabdalla/testing.git testing
           cp -rv testing/srcpkgs/paraview void-packages/srcpkgs
 
-      - name: build
-        run: |
-          export PATH="/opt/xbps/usr/bin/:$PATH"
-          cd void-packages
-          ./xbps-src -m masterdir-${{ matrix.arch }} -A ${{ matrix.arch }} binary-bootstrap
-          ./xbps-src pkg -j4 -m masterdir-${{ matrix.arch }} paraview
+      #- name: build
+      #  run: |
+      #    export PATH="/opt/xbps/usr/bin/:$PATH"
+      #    cd void-packages
+      #    ./xbps-src -m masterdir-${{ matrix.arch }} -A ${{ matrix.arch }} binary-bootstrap
+      #    ./xbps-src pkg -j4 -m masterdir-${{ matrix.arch }} paraview
 
       #- name: sign
       #  env:
@@ -82,11 +82,21 @@ jobs:
       #  run: |
       #    sha256sum $(echo paraview-*.${{ matrix.arch }}.xbps)
       #    sha512sum $(echo paraview-*.${{ matrix.arch }}.xbps)
-
+     
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          
       - name: release
         uses: softprops/action-gh-release@v2
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
         with:
           tag_name: testing
           files: |
-            void-packages/hostdir/binpkgs/paraview*
-            void-packages/hostdir/binpkgs/paraview*
+            testing/srcpkgs/paraview/template
+       #     void-packages/hostdir/binpkgs/paraview*
+       #     void-packages/hostdir/binpkgs/paraview*

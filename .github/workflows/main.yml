@@ -56,7 +56,8 @@ jobs:
 
       - name: copy paraview into srcpkgs
         run: |
-          git clone https://github.com/muezabdalla/testing.git /opt/testing
+          git clone https://github.com/muezabdalla/testing.git testing
+          ls
       #    cp -rv /opt/testing/srcpkgs/paraview void-packages/srcpkgs
 
       #- name: build
@@ -88,4 +89,4 @@ jobs:
         with:
           tag_name: testing
           files: |
-            /opt/testing/srcpkgs/paraview/template
+            testing/srcpkgs/paraview/template

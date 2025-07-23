@@ -89,5 +89,3 @@ jobs:
           tag_name: testing
           files: |
             /opt/testing/srcpkgs/paraview/template
-            #void-packages/hostdir/binpkgs/paraview*
-            #void-packages/hostdir/binpkgs/*repodata

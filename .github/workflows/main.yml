@@ -31,12 +31,12 @@ jobs:
       #    ref: master
       #    path: testing
 
-      - name: checkout void-packages
-        uses: actions/checkout@v4
-        with:
-          repository: void-linux/void-packages
-          ref: master
-          path: void-packages
+      #- name: checkout void-packages
+      #  uses: actions/checkout@v4
+      #  with:
+      #    repository: void-linux/void-packages
+      #    ref: master
+      #    path: void-packages
 
       - name: checkout xbps
         uses: actions/checkout@v4
@@ -45,19 +45,19 @@ jobs:
           ref: 0.60.3
           path: xbps
 
-      - name: build and install xbps
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libarchive-dev
-          cd xbps
-          ./configure --enable-rpath --prefix=/opt/xbps/usr
-          make -j4
-          sudo make install clean
+      #- name: build and install xbps
+      #  run: |
+      #    sudo apt-get update
+      #    sudo apt-get install -y libarchive-dev
+      #    cd xbps
+      #    ./configure --enable-rpath --prefix=/opt/xbps/usr
+      #    make -j4
+      #    sudo make install clean
 
       - name: copy paraview into srcpkgs
         run: |
           git clone https://github.com/muezabdalla/testing.git /opt/testing
-          cp -rv testing/srcpkgs/paraview void-packages/srcpkgs
+          cp -rv /opt/testing/srcpkgs/paraview void-packages/srcpkgs
 
       #- name: build
       #  run: |

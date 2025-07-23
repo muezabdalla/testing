@@ -56,10 +56,7 @@ jobs:
 
       - name: copy paraview into srcpkgs
         run: |
-          echo "NAME=${{ github.event.repository.name }}"
-          
-          git clone ${{ github.event.repository.name }} testing
-          ls
+          git clone https://github.com/muezabdalla/testing.git testing
           cp -rv testing/srcpkgs/paraview void-packages/srcpkgs
 
       - name: build

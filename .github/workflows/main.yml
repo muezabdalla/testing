@@ -17,13 +17,13 @@ jobs:
       XBPS_TARGET_ARCH: ${{ matrix.arch }}
 
     steps:
-      #- name: free space
-      #  run: |
-      #    sudo rm -rf /usr/share/dotnet
-      #    sudo rm -rf /usr/local/lib/android
-      #    sudo rm -rf /opt/ghc
-      #    sudo rm -rf /opt/hostedtoolcache/CodeQL
-      #    sudo apt install git
+      - name: free space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo apt install git
 
       - name: checkout testing
         uses: actions/checkout@v4

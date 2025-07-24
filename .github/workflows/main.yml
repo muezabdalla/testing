@@ -24,8 +24,6 @@ jobs:
           sudo rm -rf /opt/ghc
           sudo rm -rf /opt/hostedtoolcache/CodeQL
           sudo apt install git
-          nproc
-          free -h
 
       #- name: checkout testing
       #  uses: actions/checkout@v4

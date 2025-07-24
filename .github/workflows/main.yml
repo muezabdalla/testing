@@ -95,7 +95,7 @@ jobs:
       - name: release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: RELEASE_NAME
+          tag_name: ${{ RELEASE_NAME }}
           files: |
             testing/srcpkgs/paraview/template
         #    void-packages/hostdir/binpkgs/paraview*

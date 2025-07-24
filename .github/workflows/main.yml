@@ -60,20 +60,15 @@ jobs:
         run: |
           git clone https://github.com/muezabdalla/testing.git testing
           cp -rv testing/srcpkgs/paraview void-packages/srcpkgs
-          
-      - name: set tag variable
-        run: |
           . testing/srcpkgs/paraview/template
-          echo "V=$version"
           echo "RELEASE_NAME=$(echo "$version.$revision")" >> $GITHUB_ENV
 
-
-      #- name: build
-      #  run: |
-      #    export PATH="/opt/xbps/usr/bin/:$PATH"
-      #    cd void-packages
-      #    ./xbps-src -m masterdir-${{ matrix.arch }} -A ${{ matrix.arch }} binary-bootstrap
-      #    ./xbps-src pkg -j4 -m masterdir-${{ matrix.arch }} paraview
+      - name: build
+        run: |
+          export PATH="/opt/xbps/usr/bin/:$PATH"
+          cd void-packages
+          ./xbps-src -m masterdir-${{ matrix.arch }} -A ${{ matrix.arch }} binary-bootstrap
+          ./xbps-src pkg -j4 -m masterdir-${{ matrix.arch }} paraview
 
       #- name: sign
       #  env:
@@ -86,17 +81,16 @@ jobs:
       #    xbps-rindex -S --privkey <(printf '%s' "${{ secrets.PRIV_KEY }}") $PWD/*.xbps
       #    xbps-rindex -c $PWD
 
-      #- name: checksum
-      #  working-directory: void-packages/hostdir/binpkgs/
-      #  run: |
-      #    sha256sum $(echo paraview-*.${{ matrix.arch }}.xbps)
-      #    sha512sum $(echo paraview-*.${{ matrix.arch }}.xbps)
+      - name: checksum
+        working-directory: void-packages/hostdir/binpkgs/
+        run: |
+          sha256sum $(echo paraview-*.${{ matrix.arch }}.xbps)
+          sha512sum $(echo paraview-*.${{ matrix.arch }}.xbps)
      
       - name: release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.RELEASE_NAME }}
           files: |
-            testing/srcpkgs/paraview/template
-        #    void-packages/hostdir/binpkgs/paraview*
-        #    void-packages/hostdir/binpkgs/paraview*
+            void-packages/hostdir/binpkgs/paraview*
+            void-packages/hostdir/binpkgs/paraview*

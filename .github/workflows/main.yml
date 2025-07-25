@@ -75,7 +75,7 @@ jobs:
         run: |
           export PATH="/opt/xbps/usr/bin/:$PATH"
           ssh-keygen -t rsa -m PEM -f private.pem -P ${{ secrets.SIGN_PASS }}
-          xbps-rindex --sign-pkg --privkey private.pem $PWD/hostdir/binpkgs/*.xbps
+          xbps-rindex --sign-pkg --privkey private.pem $PWD/*.xbps
       - name: checksum
         working-directory: void-packages/hostdir/binpkgs/
         run: |

@@ -68,16 +68,16 @@ jobs:
           ./xbps-src -m masterdir-${{ matrix.arch }} -A ${{ matrix.arch }} binary-bootstrap
           ./xbps-src pkg -j4 -m masterdir-${{ matrix.arch }} paraview
 
-      #- name: sign
-      #  env:
-      #    XBPS_PASSPHRASE: ${{ secrets.SIGN_PASS }}
-      #  working-directory: void-packages/hostdir/binpkgs/
-      #  run: |
-      #    export PATH="/opt/xbps/usr/bin/:$PATH"
-      #    xbps-rindex -r $PWD
-      #    xbps-rindex -s --signedby "muezabdalla <muezabdalla777@gmail.com>" --privkey <(printf '%s' "${{ secrets.PRIV_KEY }}") $PWD
-      #    xbps-rindex -S --privkey <(printf '%s' "${{ secrets.PRIV_KEY }}") $PWD/*.xbps
-      #    xbps-rindex -c $PWD
+      - name: sign
+        env:
+          XBPS_PASSPHRASE: ${{ secrets.SIGN_PASS }}
+        working-directory: void-packages/hostdir/binpkgs/
+        run: |
+          export PATH="/opt/xbps/usr/bin/:$PATH"
+          xbps-rindex -r $PWD
+          xbps-rindex -s --signedby "muezabdalla <muezabdalla777@gmail.com>" --privkey <(printf '%s' "${{ secrets.PRIV_KEY }}") $PWD
+          xbps-rindex -S --privkey <(printf '%s' "${{ secrets.PRIV_KEY }}") $PWD/*.xbps
+          xbps-rindex -c $PWD
 
       - name: checksum
         working-directory: void-packages/hostdir/binpkgs/

@@ -88,4 +88,4 @@ jobs:
           tag_name: ${{ env.RELEASE_NAME }}
           files: |
             void-packages/hostdir/binpkgs/paraview*
-            void-packages/hostdir/binpkgs/paraview*
+            void-packages/hostdir/binpkgs/*repodata

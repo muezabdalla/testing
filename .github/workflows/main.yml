@@ -74,8 +74,12 @@ jobs:
         working-directory: void-packages/hostdir/binpkgs/
         run: |
           export PATH="/opt/xbps/usr/bin/:$PATH"
-          ssh-keygen -t rsa -m PEM -f private.pem -P ${{ secrets.SIGN_PASS }}
-          xbps-rindex --sign-pkg --privkey private.pem $PWD/*.xbps
+          ssh-keygen -t rsa -b 4096 -m PEM -f private.pem -P ${{ secrets.SIGN_PASS }}
+          xbps-rindex -r $PWD
+          xbps-rindex -s --signedby "muezabdalla <muezabdalla777@gmail.com>" --privkey private.pem $PWD
+          xbps-rindex -S --privkey private.pem $PWD/*.xbps
+          xbps-rindex -c $PWD
+        #  xbps-rindex --sign-pkg --privkey private.pem $PWD/*.xbps
       - name: checksum
         working-directory: void-packages/hostdir/binpkgs/
         run: |
